@@ -35,6 +35,8 @@ You're good to go!
 
 You will be prompted with a series of questions about each member on your team. Simply type your answers into the command line and hit "enter" to move on to the next question. When you are finished adding team members, use the space bar to select "Finished adding team members" and an html file will be generated in the "output" folder containing a card for each member on your team. 
 
+[Demo Video](https://drive.google.com/file/d/1R8oO3UAf09tWDhduyUEpw3TFOrPcIvtC/view)
+
 ## Built
 * [Node.js](https://nodejs.org/en/)
 * [NPM Inquirer](https://www.npmjs.com/package/inquirer)
