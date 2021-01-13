@@ -10,9 +10,134 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employees = [];
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+// Prompt the user for input to create their team's manager
+inquirer.prompt([
+    {
+        type: "input",
+        name: "managerName",
+        message: "What is your manager's name?"
+
+    },
+    {
+        type: "input",
+        name: "managerId",
+        message: "What is your manager's id?"
+    },
+    {
+        type: "input",
+        name: "managerEmail",
+        message: "What is your manager's email?"
+    },
+    {
+        type: "input",
+        name: "managerOffice",
+        message: "What is your manager's office number?"
+    },
+    {
+        type: "list",
+        name: "team",
+        message: "Which type of team member would you like to add?",
+        choices: ["Engineer", "Intern", "I don't want to add any more team members."]
+    }
+]).then(answers => {
+    // Create a new manager object using the Manager class and push it into the employees array
+    const newManager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOffice);
+    employees.push(newManager);
+
+    // Create new team members based on which option the user selects
+    switch (answers.team) {
+        case "Intern": createIntern();
+            break;
+
+        case "Engineer": createEngineer();
+            break;
+
+        case "I don't want to add any more team members.": console.log("done");
+            break;
+
+        default: console.log("Please select one option.");
+    }
+
+}).catch(error => {
+    error ? console.error(error) : console.log("Success!");
+});
+
+function createEngineer() {
+    // Prompt the user for input to create a new engineer
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "engineerName",
+            message: "What is your engineer's name?"
+
+        },
+        {
+            type: "input",
+            name: "engineerId",
+            message: "What is your engineer's id?"
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "What is your engineer's email?"
+        },
+        {
+            type: "input",
+            name: "engineerGithub",
+            message: "What is your engineer's Github username?"
+        }
+        
+    
+    // Create a new engineer object using the Engineer class and push it into the employees array
+    ]).then(answers => {
+        const newEngineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+        employees.push(newEngineer);
+    }).catch(error => {
+        error ? console.error(error) : console.log("Success!");
+    });
+};
+
+function createIntern() {
+    // Prompt the user for input to create a new intern
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "internName",
+            message: "What is your intern's name?"
+
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: "What is your intern's id?"
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: "What is your intern's email?"
+        },
+        {
+            type: "input",
+            name: "internSchool",
+            message: "What is your intern's school?"
+        }
+        
+    // Create a new intern object using the Intern class and push it into the employees array
+    ]).then(answers => {
+        const newIntern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+        console.log(newIntern);
+        employees.push(newIntern);
+        console.log(employees);
+    }).catch(error => {
+        error ? console.error(error) : console.log("Success!");
+    });
+};
+
+
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
