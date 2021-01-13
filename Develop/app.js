@@ -23,21 +23,18 @@ function firstQuestion() {
         }
     ]).then(answers => {
         // Create new team members based on which option the user selects
-        switch (answers.team) {
-            case "Manager": createManager();
-                break;
-
-            case "Intern": createIntern();
-                break;
-
-            case "Engineer": createEngineer();
-                break;
-
-            case "Finished adding team members.": console.log("done");
-                break;
-
-            default: console.log("Please select one option.");
-        };
+        if(answers.team === "Manager") {
+            createManager();
+        } else if(answers.team === "Intern") {
+            createIntern();
+        } else if(answers.team === "Engineer") {
+            createEngineer();
+        } 
+        // If they are done adding team members, pass the employee array to the render function to create the html
+        else {
+            fs.writeFile("./output/team.html", `${render(employees)}`, (err) => err ? console.error(err) : console.log("Success!"))
+            
+        }
 
     }).catch(error => {
         error ? console.error(error) : console.log("Success!");
@@ -156,6 +153,10 @@ function createIntern() {
 };
 
 firstQuestion();
+
+
+
+
 
 
 
