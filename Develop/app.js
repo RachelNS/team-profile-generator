@@ -12,7 +12,8 @@ const render = require("./lib/htmlRenderer");
 
 const employees = [];
 
-// Prompt the user for input to create their team's manager
+function firstQuestion() {
+   // Prompt the user for input to create their team's manager
 inquirer.prompt([
     {
         type: "input",
@@ -62,7 +63,9 @@ inquirer.prompt([
 
 }).catch(error => {
     error ? console.error(error) : console.log("Success!");
-});
+}); 
+
+}
 
 function createEngineer() {
     // Prompt the user for input to create a new engineer
@@ -94,6 +97,7 @@ function createEngineer() {
     ]).then(answers => {
         const newEngineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         employees.push(newEngineer);
+        firstQuestion();
     }).catch(error => {
         error ? console.error(error) : console.log("Success!");
     });
@@ -127,13 +131,14 @@ function createIntern() {
     // Create a new intern object using the Intern class and push it into the employees array
     ]).then(answers => {
         const newIntern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
-        console.log(newIntern);
         employees.push(newIntern);
-        console.log(employees);
+        firstQuestion();
     }).catch(error => {
         error ? console.error(error) : console.log("Success!");
     });
 };
+
+firstQuestion();
 
 
 
