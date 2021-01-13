@@ -6,6 +6,7 @@ class Employee {
         this.name = name;
         this.id = id;
         this.email = email;
+        this.role = "Employee";
     };
     getName() {
         return this.name;
@@ -17,7 +18,7 @@ class Employee {
         return this.email;
     };
     getRole() {
-        return "Employee";
+        return this.role;
     };
     
 
